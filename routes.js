@@ -1,7 +1,7 @@
 const express = require('express')
 const entidadeController = require('./controllers/entidade')
 const finalidadeController = require('./controllers/finalidade')
-const conslutaController = require('./controllers/consulta')
+const consultaController = require('./controllers/consulta')
 
 const routes = express.Router()
 
@@ -13,7 +13,8 @@ routes.post('/entidades', entidadeController.store);
 routes.get('/bot/entidades', entidadeController.bot);
 
 routes.get('/finalidades', finalidadeController.index)
-routes.get('/finalidades/:entidadeId', conslutaController.index)
+routes.get('/finalidades/:entidadeId', consultaController.index)
+routes.post('/bot/finalidades', consultaController.bot)
 routes.post('/finalidades', finalidadeController.store)
 
 module.exports = routes;
