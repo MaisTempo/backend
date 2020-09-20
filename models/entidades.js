@@ -1,6 +1,6 @@
 const { Schema, model } = require('mongoose');
 
-const EmpresaSchema = new Schema ({
+const EntidadeSchema = new Schema ({
     name: {
         type: String,
         required: true,
@@ -9,4 +9,4 @@ const EmpresaSchema = new Schema ({
     timestamps: true,
 }); // createdAt, updatedAt - criado automático e atualizado pelo mongoose pela estrutura timestamp adicionada ao final
 
-module.exports = model('Empresa', EmpresaSchema);
+module.exports = model('Entidade', EntidadeSchema);

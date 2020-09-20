@@ -1,12 +1,12 @@
 const express = require('express')
-const devController = require('./controllers/empresa')
+const entidadeController = require('./controllers/entidades')
 
 const routes = express.Router()
 
 routes.get('/', (req, res) => {
     return res.send('API para Projeto MaisTempo')
 })
-routes.get('/empresas', devController.index);
-routes.post('/empresas', devController.store);
+routes.get('/entidades', entidadeController.index);
+routes.post('/entidades', entidadeController.store);
 
 module.exports = routes;
