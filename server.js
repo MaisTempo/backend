@@ -6,4 +6,4 @@ api.get('/', (req, res) => {
     return res.send('API para Projeto MaisTempo')
 })
 
-api.listen(3333)
+api.listen(process.env.PORT || 8080)
