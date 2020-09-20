@@ -10,11 +10,14 @@ routes.get('/', (req, res) => {
 })
 routes.get('/entidades', entidadeController.index);
 routes.post('/entidades', entidadeController.store);
-routes.get('/bot/entidades', entidadeController.bot);
 
 routes.get('/finalidades', finalidadeController.index)
+routes.get('/finalidades/id/:finalidadeId', finalidadeController.id)
 routes.get('/finalidades/:entidadeId', consultaController.index)
-routes.post('/bot/finalidades', consultaController.bot)
 routes.post('/finalidades', finalidadeController.store)
+
+routes.get('/bot/entidades', entidadeController.bot);
+routes.post('/bot/finalidades', consultaController.bot)
+routes.post('/bot/finalidades/fluxo', finalidadeController.bot)
 
 module.exports = routes;

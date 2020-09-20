@@ -28,7 +28,31 @@ module.exports = {
 
         return res.json(finalidade);
     },
+    async id (req, res) {
+        const {finalidadeId} = req.params;
+
+        const finalidade = await finalidadeModel.findById(finalidadeId);
+        if (!finalidade) {
+            return  res.status(400).json({error: 'Finalidade não cadastrada.'});
+        }
+
+        return res.json(finalidade);
+    },
     async bot (req, res) {
         const { resposta, controle } = req.body;
+
+        const finalidadeId = controle[resposta]
+        const finalidade = await finalidadeModel.findById(finalidadeId);
+        if (!finalidade) {
+            return  res.status(400).json({error: 'Finalidade não cadastrada.'});
+        }
+
+        const entidade = await entidadeModel.findById(finalidade.entidade)
+        if (!entidade) {
+            return  res.status(400).json({error: 'Entidade não cadastrada.'});
+        }
+
+        return res.json({"mensagem": finalidade.fluxo, "descricao": finalidade.descricao,
+                            "finalidade": finalidade.name, "entidade": entidade.name})
     }
 };
