@@ -52,7 +52,12 @@ module.exports = {
             return  res.status(400).json({error: 'Entidade não cadastrada.'});
         }
 
-        return res.json({"mensagem": finalidade.fluxo, "descricao": finalidade.descricao,
+        message = ''
+        for (var i = 0; i < finalidade.fluxo.length; i++) {
+            message += `${i+1}: ${finalidade.fluxo[i]}\n`
+        }
+
+        return res.json({"mensagem": message, "descricao": finalidade.descricao,
                             "finalidade": finalidade.name, "entidade": entidade.name})
     }
 };
