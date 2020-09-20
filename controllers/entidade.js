@@ -6,7 +6,7 @@ module.exports = {
         return res.json(entidades);
     },
     async store (req, res) {
-        const { name } = req. body;
+        const { name, url } = req. body;
 
         const entiExist = await entidadeModel.findOne({name: name});
 
@@ -15,7 +15,8 @@ module.exports = {
         }
 
         const entidade = await entidadeModel.create({
-            name: name
+            name: name,
+            url: url
         });
 
         return res.json(entidade);
