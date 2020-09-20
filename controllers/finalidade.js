@@ -27,5 +27,8 @@ module.exports = {
         });
 
         return res.json(finalidade);
+    },
+    async bot (req, res) {
+        const { resposta, controle } = req.body;
     }
 };
