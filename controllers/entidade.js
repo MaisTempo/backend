@@ -1,3 +1,4 @@
+const entidade = require('../models/entidade');
 const entidadeModel = require('../models/entidade');
 
 module.exports = {
@@ -20,5 +21,19 @@ module.exports = {
         });
 
         return res.json(entidade);
+    },
+    async bot (req, res) {
+        const entidades = await entidadeModel.find();
+        const entidadesNames = []
+        for (var i = 0; i < entidades.length; i++) {
+            entidadesNames.push(entidades[i]["name"])
+        }
+        entidadesNames.sort()
+        message = ''
+        for (var i = 0; i < entidadesNames.length; i++) {
+            message += `${i+1}: ${entidadesNames[i]}\n`
+        }
+
+        return res.json({"mensagem":message});
     }
 };
