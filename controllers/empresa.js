@@ -1,4 +1,4 @@
-import empresaModel from '../models/empresa';
+const empresaModel = require('../models/empresa');
 
 module.exports = {
     async index (req, res) {
