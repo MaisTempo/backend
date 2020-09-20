@@ -27,5 +27,15 @@ module.exports = {
         });
 
         return res.json(finalidade);
-    }
+    },
+    async id (req, res) {
+        const {finalidadeId} = req.params;
+
+        const finalidade = await finalidadeModel.findById(finalidadeId);
+        if (!finalidade) {
+            return  res.status(400).json({error: 'Finalidade não cadastrada.'});
+        }
+
+        return res.json(finalidade);
+    },
 };
