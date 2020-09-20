@@ -10,7 +10,7 @@ module.exports = {
         const { name, fluxo, descricao, entidadeId } = req. body;
 
         const entidade = await entidadeModel.findById(entidadeId);
-        if (!entidadeId) {
+        if (!entidade) {
             return  res.status(400).json({error: 'Entidade não cadastrada.'});
         }
 
