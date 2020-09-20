@@ -7,7 +7,7 @@ module.exports = {
         return res.json(finalidades);
     },
     async store (req, res) {
-        const { name, fluxo, entidadeId } = req. body;
+        const { name, fluxo, descricao, entidadeId } = req. body;
 
         const entidade = await entidadeModel.findById(entidadeId);
         if (!entidadeId) {
@@ -22,6 +22,7 @@ module.exports = {
         const finalidade = await finalidadeModel.create({
             name: name,
             entidade: entidade._id,
+            descricao: descricao,
             fluxo: fluxo
         });
 
