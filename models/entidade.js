@@ -5,6 +5,10 @@ const EntidadeSchema = new Schema ({
         type: String,
         required: true,
     },
+    url: {
+        type: String,
+        required: true,
+    }
 }, {
     timestamps: true,
 }); // createdAt, updatedAt - criado automático e atualizado pelo mongoose pela estrutura timestamp adicionada ao final
