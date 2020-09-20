@@ -24,16 +24,13 @@ module.exports = {
     },
     async bot (req, res) {
         const entidades = await entidadeModel.find();
-        const entidadesNames = []
-        for (var i = 0; i < entidades.length; i++) {
-            entidadesNames.push(entidades[i]["name"])
-        }
-        entidadesNames.sort()
+        const dict = {}
         message = ''
-        for (var i = 0; i < entidadesNames.length; i++) {
-            message += `${i+1}: ${entidadesNames[i]}\n`
+        for (var i = 0; i < entidades.length; i++) {
+            message += `${i+1}: ${entidades[i]['name']}\n`
+            dict[i+1] = entidades[i]['_id']
         }
 
-        return res.json({"mensagem":message});
+        return res.json({"mensagem":message, "controle":dict});
     }
 };
