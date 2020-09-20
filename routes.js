@@ -10,6 +10,7 @@ routes.get('/', (req, res) => {
 })
 routes.get('/entidades', entidadeController.index);
 routes.post('/entidades', entidadeController.store);
+routes.get('/bot/entidades', entidadeController.bot);
 
 routes.get('/finalidades', finalidadeController.index)
 routes.get('/finalidades/:entidadeId', conslutaController.index)
