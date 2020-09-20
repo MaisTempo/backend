@@ -1,4 +1,4 @@
-const entidadeModel = require('../models/entidades');
+const entidadeModel = require('../models/entidade');
 
 module.exports = {
     async index (req, res) {
