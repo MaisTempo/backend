@@ -40,6 +40,8 @@ module.exports = {
     },
     async bot (req, res) {
         const { resposta, controle } = req.body;
+        console.log(controle)
+        console.log(resposta)
 
         const finalidadeId = controle[resposta]
         const finalidade = await finalidadeModel.findById(finalidadeId);
