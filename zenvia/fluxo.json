@@ -1,0 +1,286 @@
+{
+  "alias": "MaisTempo",
+  "description": "",
+  "steps": [
+    {
+      "id": "step010",
+      "type": "apiActivity",
+      "label": "Buscar fluxo da finalidade",
+      "properties": {
+        "from": "#{#random.randomAlphanumeric(12)}"
+      },
+      "variables": {
+        "mensagem_fluxo": "response.mensagem",
+        "descricao_fluxo": "response.descricao",
+        "finalidade_fluxo": "response.finalidade",
+        "entidade_fluxo": "response.entidade"
+      },
+      "contents": [
+        {
+          "type": "application/json",
+          "payload": {
+            "json": {
+              "httpMethod": "POST",
+              "url": "https://maistempo.herokuapp.com/bot/finalidades/fluxo",
+              "payload": {
+                "resposta": "#{finalidade_selecionada}",
+                "controle": "#{controle_finalidade}"
+              },
+              "httpHeaders": {
+                "Content-Type": "application/json"
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "step06",
+      "type": "sendWhatsAppActivity",
+      "properties": {
+        "from": "#{session['whatsappFrom']}"
+      },
+      "contents": [
+        {
+          "type": "text/plain",
+          "payload": {
+            "text": "Para a entidade #{entidade_finalidade} nós temos as seguintes finalidades cadastradas:\n#{mensagem_finalidade}"
+          }
+        }
+      ]
+    },
+    {
+      "id": "step0",
+      "type": "sendWhatsAppActivity",
+      "label": "Agradecimento",
+      "properties": {
+        "from": "#{session['whatsappFrom']}"
+      },
+      "contents": [
+        {
+          "type": "text/plain",
+          "payload": {
+            "text": "Muito bem. Vamos consultar pra você!"
+          }
+        }
+      ]
+    },
+    {
+      "id": "step07",
+      "type": "whatsappEvent",
+      "label": "Finalidade selecionada",
+      "variables": {
+        "finalidade_selecionada": "payload"
+      }
+    },
+    {
+      "id": "step08",
+      "type": "sendWhatsAppActivity",
+      "label": "Entidades cadastradas",
+      "properties": {
+        "from": "#{session['whatsappFrom']}"
+      },
+      "contents": [
+        {
+          "type": "text/plain",
+          "payload": {
+            "text": "Estas são as empresas disponíveis em nosso sistema:\n#{mensagem_entidade}"
+          }
+        }
+      ]
+    },
+    {
+      "id": "step03",
+      "type": "apiActivity",
+      "label": "Busca Entidades cadastradas",
+      "properties": {
+        "from": "#{#random.randomAlphanumeric(12)}"
+      },
+      "variables": {
+        "mensagem_entidade": "response.mensagem",
+        "controle_entidade": "response.controle"
+      },
+      "contents": [
+        {
+          "type": "application/json",
+          "payload": {
+            "json": {
+              "httpHeaders": {
+                "Content-Type": "application/json"
+              },
+              "httpMethod": "GET",
+              "url": "http://maistempo.herokuapp.com/bot/entidades"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "step04",
+      "type": "sendWhatsAppActivity",
+      "label": "Apresentação",
+      "properties": {
+        "from": "#{session['whatsappFrom']}"
+      },
+      "contents": [
+        {
+          "type": "text/plain",
+          "payload": {
+            "text": "Olá #{username}, aqui é o robô da +Tempo."
+          }
+        }
+      ]
+    },
+    {
+      "id": "step05",
+      "type": "apiActivity",
+      "label": "Chamada de API",
+      "properties": {
+        "from": "#{#random.randomAlphanumeric(12)}"
+      },
+      "variables": {
+        "mensagem_finalidade": "response.mensagem",
+        "controle_finalidade": "response.controle",
+        "entidade_finalidade": "response.entidade"
+      },
+      "contents": [
+        {
+          "type": "application/json",
+          "payload": {
+            "json": {
+              "payload": {
+                "resposta": "#{entidade_selecionada}",
+                "controle": "#{controle_entidade}"
+              },
+              "httpHeaders": {
+                "Content-Type": "application/json"
+              },
+              "httpMethod": "POST",
+              "url": "https://maistempo.herokuapp.com/bot/finalidades"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "idEventoFinal",
+      "type": "endEvent",
+      "label": "label 3",
+      "properties": {
+        "endEvent": "true"
+      }
+    },
+    {
+      "id": "step09",
+      "type": "whatsappEvent",
+      "variables": {
+        "entidade_selecionada": "payload"
+      }
+    },
+    {
+      "id": "idEventoInicial",
+      "type": "whatsappEvent",
+      "label": "Evento inicial",
+      "properties": {
+        "startEvent": "true",
+        "appId": "whatsapp_chatbot",
+        "appType": "chatbot"
+      },
+      "variables": {
+        "whatsappFrom": "'pool-stove'",
+        "username": "visitor.firstName"
+      },
+      "conditions": [
+        {
+          "type": "channelSourceCondition",
+          "values": [
+            "pool-stove"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "step011",
+      "type": "sendWhatsAppActivity",
+      "label": "Agradecimento",
+      "properties": {
+        "from": "#{session['whatsappFrom']}"
+      },
+      "contents": [
+        {
+          "type": "text/plain",
+          "payload": {
+            "text": "Show! Vamos buscar o fluxo para você, é pra já!"
+          }
+        }
+      ]
+    },
+    {
+      "id": "step02",
+      "type": "sendWhatsAppActivity",
+      "label": "Fluxo da finalidade",
+      "properties": {
+        "from": "#{session['whatsappFrom']}"
+      },
+      "contents": [
+        {
+          "type": "text/plain",
+          "payload": {
+            "text": "\nPara a finalidade #{finalidade_fluxo} da entidade #{entidade_fluxo} você deverá seguir os seguintes passos:\n #{mensagem_fluxo}\n\nObs.: #{descricao_fluxo}"
+          }
+        }
+      ]
+    }
+  ],
+  "connections": [
+    {
+      "from": "step0",
+      "to": "step05"
+    },
+    {
+      "from": "step05",
+      "to": "step06"
+    },
+    {
+      "from": "step03",
+      "to": "step08"
+    },
+    {
+      "from": "step06",
+      "to": "step07"
+    },
+    {
+      "from": "step04",
+      "to": "step03"
+    },
+    {
+      "from": "step09",
+      "to": "step0"
+    },
+    {
+      "from": "idEventoInicial",
+      "to": "step04"
+    },
+    {
+      "from": "step07",
+      "to": "step011"
+    },
+    {
+      "from": "step08",
+      "to": "step09"
+    },
+    {
+      "from": "step011",
+      "to": "step010"
+    },
+    {
+      "from": "step010",
+      "to": "step02"
+    },
+    {
+      "from": "step02",
+      "to": "idEventoFinal"
+    }
+  ],
+  "defaultConversationalChannel": "WHATSAPP"
+}
