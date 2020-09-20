@@ -31,6 +31,7 @@ Entidades que possuem cadastro na plataforma.
 [{
         "_id":"5f675fd10ba47d663ecb2354",
         "name":"vivo",
+        "url":"https://www.pngfind.com/pngs/m/332-3323701_logo-vivo-roxo-png-vivo-transparent-png.png",
         "createdAt":"2020-09-20T13:57:37.628Z",
         "updatedAt":"2020-09-20T13:57:37.628Z",
         "__v":0
@@ -41,6 +42,7 @@ Entidades que possuem cadastro na plataforma.
 |-----------|------------------------------------------|
 | _id       | Identifica a entidade no banco de dados. |
 | name      | Nome da entidade.                       |
+| url      | Caminho para logo da entidade.                       |
 | createdAt | Identifica criação no banco dade dados.  |
 | updatedAt | Identifica atualização.                  |
 | __v       | Identifica versão.                     |
